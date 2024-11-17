@@ -1,0 +1,117 @@
+<div class="page-wrapper">
+
+<!-- MENU SIDEBAR-->
+<aside class="menu-sidebar d-none d-lg-block">
+  <div class="logo">
+    <a routerLink="/products">
+      <img src="assets/images/products/logoo.png" alt="TuFerreteriaOnline" class="img-responsive">
+    </a>
+  </div>
+  <!-- COMPONENTE MENU-->
+  <app-product-category-menu></app-product-category-menu>
+ 
+</aside>
+<!-- END MENU SIDEBAR-->
+
+  <!-- PAGE CONTAINER-->
+  <div class="page-container">
+    <!-- HEADER DESKTOP-->
+    <header class="header-desktop">
+      <div class="section-content section-content-p30">
+        <div class="container-fluid">
+          <div class="header-wrap">
+            
+            <!--NUEVO COMPONENTE D BUSQUEDA-->
+            <app-search></app-search>
+
+            <app-cart-status></app-cart-status>
+            
+          </div>
+          <div class="account-wrap"></div>
+        </div>
+      </div>
+    </header>
+    <!-- END HEADER DESKTOP-->
+
+    <!-- MAIN CONTENT-->
+
+   <!-- //esto hace que me de actualizaciones parciales en nuestra pagina 
+    //es la salida del enrutador-->
+    <router-outlet></router-outlet>
+
+
+  </div>
+</div>
+
+<!-- END PAGE CONTAINER-->
+
+
+<!-- FOOTER -->
+<footer class="bg-dark text-light pt-5 pb-4">
+  <div class="container text-md-left">
+    <div class="row">
+      <!-- Logo y Descripción -->
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+        <h5 class="text-uppercase fw-bold text-custom-orange">TuFerreteriaOnline</h5>
+        <p>
+          Somos tu tienda de ferretería en línea, ofreciendo productos de alta calidad para tus proyectos. Nuestro compromiso es ayudarte a completar cualquier tarea con herramientas y materiales confiables.
+        </p>
+      </div>
+
+      <!-- Enlaces Rápidos -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        <h6 class="text-uppercase fw-bold text-custom-orange">Enlaces Rápidos</h6>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-light">Home</a></li>
+          <li><a href="#" class="text-light">About us</a></li>
+          <li><a href="#" class="text-light">FAQ</a></li>
+          <li><a href="#" class="text-light">Recommendations</a></li>
+        </ul>
+      </div>
+
+      <!-- Información de Contacto -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-4">
+        <h6 class="text-uppercase fw-bold text-custom-orange">Contacto</h6>
+        <ul class="list-unstyled">
+          <li><i class="fas fa-map-marker-alt me-2"></i> Cr 6w # 28-03, Neiva, Colombia</li>
+          <li><i class="fas fa-envelope me-2"></i> feliperoa913gmail.com</li>
+          <li><i class="fas fa-phone me-2"></i> +57 317-385-1783</li>
+          <li><i class="fas fa-clock me-2"></i> Lunes - Viernes: 9:00 - 18:00</li>
+        </ul>
+      </div>
+
+      <!-- Redes Sociales -->
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+        <h6 class="text-uppercase fw-bold text-custom-orange">Síguenos</h6>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a href="#" class="text-light"><i class="fab fa-facebook-f"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#" class="text-light"><i class="fab fa-twitter"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#" class="text-light"><i class="fab fa-linkedin"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Línea Divisora y Copyright -->
+    <hr class="mb-4">
+    <div class="row align-items-center">
+      <div class="col-md-6 col-lg-6">
+        <p class="text-center text-md-start">© 2024 TuFerreteriaOnline. Todos los derechos reservados.</p>
+      </div>
+      <div class="col-md-6 col-lg-6">
+        <p class="text-center text-md-end">
+          <a href="#" class="text-light">Términos y Condiciones</a> | 
+          <a href="#" class="text-light">Política de Privacidad</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
