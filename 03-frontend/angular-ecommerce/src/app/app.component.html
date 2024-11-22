@@ -23,8 +23,13 @@
             
             <!--NUEVO COMPONENTE D BUSQUEDA-->
             <app-search></app-search>
-
-            <app-cart-status></app-cart-status>
+            
+            <div class="right-items header-wrap mx-8 px-8">
+              <app-icon-manager-users *ngIf="isAuthenticated && isAdmin"></app-icon-manager-users>
+              <app-close-sesion ></app-close-sesion>   
+              <app-users *ngIf="!isAuthenticated" style="margin-right: 20px;"></app-users> 
+              <app-cart-status></app-cart-status>
+            </div>
             
           </div>
           <div class="account-wrap"></div>

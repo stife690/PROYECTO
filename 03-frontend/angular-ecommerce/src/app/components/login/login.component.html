@@ -1,0 +1,73 @@
+<div class="main-content container mt-5">
+    <div class="section-content section-content-p30 row justify-content-center">
+      <div class="container-fluid col-md-6">
+        <div class="card">
+          <div class="card-header text-white text-center">
+            <h3 style="color:white">Inicio de Sesión</h3>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+              <!-- Campo Correo Electrónico -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  [(ngModel)]="email"
+                  placeholder="Ingresa tu correo electrónico"
+                  #emailInput="ngModel"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  required
+                />
+                <!-- Mensaje de error si el correo es inválido -->
+                <div *ngIf="emailInput.invalid && emailInput.touched" class="text-danger">
+                  Ingresa un correo electrónico válido.
+                </div>
+              </div>
+  
+              <!-- Campo Contraseña -->
+              <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  [(ngModel)]="password"
+                  placeholder="Ingresa tu contraseña"
+                  required
+                />
+              </div>
+  
+              <!-- Botón de inicio de sesión -->
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+                  Iniciar Sesión
+                </button>
+              </div>
+            </form>
+  
+            <!-- Mostrar el mensaje de éxito si está disponible -->
+            <div *ngIf="successMessage" class="alert alert-success mt-3">
+              {{ successMessage }}
+            </div>
+  
+            <!-- Mostrar el mensaje de error si está disponible -->
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+              {{ errorMessage }}
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <small>¿No tienes cuenta? 
+            <a class="text-primary" routerLink="/register">
+              Regístrate aquí
+            </a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

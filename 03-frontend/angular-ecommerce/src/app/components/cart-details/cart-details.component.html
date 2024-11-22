@@ -61,15 +61,20 @@
                     <tr>
                         <td colspan="2"></td>
                         <td style="font-weight: bold">
-                            <p>Total Quantity: {{ totalQuantity }}</p>
-                            <p>Shipping: FREE</p>
-                            <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
-                            <div style="display: flex; justify-content: center; margin-top: 20px;">
-                                <a routerLink="/checkout" class="btn btn-primary" style="display: block; visibility: visible;">Checkout</a>
-                            </div>
-                            
+                          <p>Total Quantity: {{ totalQuantity }}</p>
+                          <p>Shipping: FREE</p>
+                          <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
+                          
+                          <!-- Mostrar mensaje de error si no está autenticado -->
+                          <p *ngIf="errorMessage" style="color: red; text-align: center;">{{ errorMessage }}</p>
+                          
+                          <div style="display: flex; justify-content: center; margin-top: 20px;">
+                            <button (click)="checkout()" class="btn btn-primary" style="display: block; visibility: visible;">Checkout</button>
+                          </div>
                         </td>
-                    </tr>
+                      </tr>
+                      
+                      
 
                 </table>
 

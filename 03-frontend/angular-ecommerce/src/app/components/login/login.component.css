@@ -1,0 +1,23 @@
+/* register.component.css */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    
+    background-color: #df5e13;
+    
+  }
+  
+  .card-footer {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .btn-primary {
+    font-size: 16px;
+  }
+  

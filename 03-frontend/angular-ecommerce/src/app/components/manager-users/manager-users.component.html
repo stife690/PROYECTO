@@ -1,0 +1,88 @@
+<div class="main-content container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h2 class="text-center mb-4">Gestión de Usuarios</h2>
+
+      <!-- Botón para agregar usuario -->
+      <button class="btn btn-primary mb-3" (click)="addUser()">+ Agregar Usuario</button>
+
+      <!-- Tabla de usuarios -->
+      <table class="table table-hover table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; let i = index">
+            <td>{{ (currentPage - 1) * usersPerPage + (i + 1) }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2" (click)="editUser(user)">Editar</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Paginación -->
+      <nav>
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="changePage(currentPage - 1)">Anterior</a>
+          </li>
+          <li class="page-item" [class.disabled]="(currentPage * usersPerPage) >= totalUsers">
+            <a class="page-link" (click)="changePage(currentPage + 1)">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Formulario para editar/agregar usuario -->
+      <div *ngIf="selectedUser" class="card mt-4">
+        <div class="card-header bg-info text-white">
+          {{ selectedUser.id ? 'Editar Usuario' : 'Nuevo Usuario' }}
+        </div>
+        <div class="card-body">
+          <form #userForm="ngForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre completo</label>
+              <input id="name" type="text" placeholder="Ingresa tu nombre completo" class="form-control" [(ngModel)]="selectedUser.name" name="name" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input 
+                id="email" 
+                type="email" 
+                class="form-control" 
+                [(ngModel)]="selectedUser.email" 
+                name="email" 
+                placeholder="Ingresa tu correo electrónico"
+                required 
+                [pattern]="emailPattern"
+                #email="ngModel" />
+              <div *ngIf="email.invalid && email.touched" class="text-danger">
+                Email inválido
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="newPassword" class="form-label">Nueva Contraseña</label>
+              <input required id="newPassword" type="password" placeholder="Ingresa la nueva contraseña" class="form-control" [(ngModel)]="selectedUser.newPassword" name="newPassword" />
+            </div>
+            <button 
+              type="button" 
+              class="btn btn-success me-2" 
+              (click)="saveUser()" 
+              [disabled]="userForm.invalid">Guardar</button>
+            <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancelar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
