@@ -19,7 +19,7 @@
     onSubmit(): void {
       const userData = { name: this.name, email: this.email, password: this.password };
 
-      this.http.post('http://localhost:8080/api/register', userData).subscribe(
+      this.http.post('https://localhost:8080/api/register', userData).subscribe(
         (response) => {
           console.log('Usuario registrado con éxito:', response);
           this.successMessage = 'Usuario registrado exitosamente!';

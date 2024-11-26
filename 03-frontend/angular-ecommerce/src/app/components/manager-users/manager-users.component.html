@@ -70,10 +70,36 @@
                 Email inválido
               </div>
             </div>
-            <div class="mb-3">
-              <label for="newPassword" class="form-label">Nueva Contraseña</label>
-              <input required id="newPassword" type="password" placeholder="Ingresa la nueva contraseña" class="form-control" [(ngModel)]="selectedUser.newPassword" name="newPassword" />
+
+            <!-- Campo de contraseña solo visible en la creación de usuario o cuando se desea cambiar la contraseña -->
+            <div *ngIf="!selectedUser.id || selectedUser.newPassword" class="mb-3">
+              <label for="newPassword" class="form-label">Contraseña</label>
+              <input 
+                id="newPassword" 
+                type="password" 
+                placeholder="Ingresa la nueva contraseña" 
+                class="form-control" 
+                [(ngModel)]="selectedUser.newPassword" 
+                required
+                name="newPassword" />
             </div>
+
+            <!-- Confirmación de la contraseña -->
+            <div *ngIf="!selectedUser.id || selectedUser.newPassword" class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+              <input 
+                id="confirmPassword" 
+                type="password" 
+                placeholder="Confirma tu nueva contraseña" 
+                class="form-control" 
+                [(ngModel)]="selectedUser.confirmPassword" 
+                
+                name="confirmPassword" />
+              <div *ngIf="selectedUser.newPassword !== selectedUser.confirmPassword && selectedUser.confirmPassword" class="text-danger">
+                Las contraseñas no coinciden.
+              </div>
+            </div>
+
             <button 
               type="button" 
               class="btn btn-success me-2" 

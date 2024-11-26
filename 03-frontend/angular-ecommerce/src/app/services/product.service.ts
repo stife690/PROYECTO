@@ -10,15 +10,15 @@ import { ProductCategory } from '../common/product-category';
 })
 export class ProductService {
 
-  private baseUrl = 'http://localhost:8080/api/products';
+  private baseUrl = 'https://localhost:8080/api/products';
 
-  private categoryUrl = 'http://localhost:8080/api/product-category';
+  private categoryUrl = 'https://localhost:8080/api/product-category';
 
   constructor(private httpClient: HttpClient) { }
 
   getProduct(theProductId: number): Observable<Product> {
 
-    // need to build URL based on product id
+    // Es necesario crear una URL basada en la identificación del producto.
     const productUrl = `${this.baseUrl}/${theProductId}`;
 
     return this.httpClient.get<Product>(productUrl);
@@ -28,7 +28,7 @@ export class ProductService {
     thePageSize: number,
     theCategoryId: number): Observable<GetResponseProducts> {
 
-    // need to build URL based on category id, page and size 
+    // Es necesario crear una URL basada en el ID de categoría, la página y el tamaño.
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
       + `&page=${thePage}&size=${thePageSize}`;
 
@@ -38,7 +38,7 @@ export class ProductService {
 
   getProductList(theCategoryId: number): Observable<Product[]> {
 
-    // need to build URL based on category id 
+    // Es necesario crear una URL basada en la identificación de la categoría.
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
 
     return this.getProducts(searchUrl);
@@ -46,7 +46,7 @@ export class ProductService {
 
   searchProducts(theKeyword: string): Observable<Product[]> {
 
-    // need to build URL based on the keyword 
+    // Es necesario crear una URL basada en la palabra clave.
     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
 
     return this.getProducts(searchUrl);
@@ -57,7 +57,7 @@ export class ProductService {
                         thePageSize: number,
                         theKeyword: string): Observable<GetResponseProducts> {
 
-    // need to build URL based on keyword, page and size 
+    // Es necesario crear una URL basada en palabras clave, página y tamaño.
     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`
                      + `&page=${thePage}&size=${thePageSize}`;
 

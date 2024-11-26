@@ -23,6 +23,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CloseSesionComponent } from './components/close-sesion/close-sesion.component';
 import { ManagerUsersComponent } from './components/manager-users/manager-users.component';
 import { IconManagerUsersComponent } from './components/icon-manager-users/icon-manager-users.component';
+import { TraductorComponent } from './components/traductor/traductor.component';
 
 const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'google', component: TraductorComponent},
   { path: 'manager-users', component: ManagerUsersComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: '**', redirectTo: '/products', pathMatch: 'full' },
@@ -55,6 +57,7 @@ const routes: Routes = [
     CloseSesionComponent,
     ManagerUsersComponent,
     IconManagerUsersComponent,
+    TraductorComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,49 @@
+/* Estilo para el enlace de selección de idioma */
+.VIpgJd-ZVi9od-xl07Ob-lTBxed {
+  display: inline-block !important;
+  background-color: #4CAF50 !important; /* Color de fondo verde */
+  color: white !important; /* Color del texto */
+  font-size: 16px !important; /* Tamaño de la fuente */
+  padding: 12px 24px !important; /* Padding alrededor del texto para hacerlo más grande */
+  border-radius: 25px !important; /* Bordes redondeados */
+  text-align: center !important; /* Alinear el texto en el centro */
+  text-decoration: none !important; /* Quitar subrayado del enlace */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; /* Sombra suave alrededor */
+  transition: all 0.3s ease !important; /* Transición suave al pasar el ratón */
+}
+
+/* Efecto al pasar el ratón sobre el enlace */
+.VIpgJd-ZVi9od-xl07Ob-lTBxed:hover {
+  background-color: #45a049 !important; /* Color ligeramente más oscuro */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important; /* Aumenta la sombra */
+  transform: translateY(-2px) !important; /* Mueve ligeramente hacia arriba */
+}
+
+/* Estilo para el icono de flecha dentro del enlace */
+.VIpgJd-ZVi9od-xl07Ob-lTBxed span[aria-hidden="true"] {
+  margin-left: 8px !important; /* Espacio entre el texto y la flecha */
+  font-size: 18px !important; /* Aumenta el tamaño de la flecha */
+}
+
+/* Asegurarnos de que el contenedor de selección de idioma tenga buen aspecto */
+.goog-te-gadget {
+  margin-top: 10px !important;
+}
+
+/* En tu hoja de estilos local */
+.indicador {
+  color: black !important; 
+  /* Otros estilos personalizados */
+}
+
+.indicator > span {
+  /* styles for the child span */
+}
+
+.google {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
+  z-index: 3 !important;
+  padding: 15px !important;
+}

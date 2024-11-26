@@ -9,8 +9,8 @@ import { State } from '../common/state';
 })
 export class Luv2ShopFormService {
 
-  private countriesUrl = 'http://localhost:8080/api/countries';
-  private statesUrl = 'http://localhost:8080/api/states';
+  private countriesUrl = 'https://localhost:8080/api/countries';
+  private statesUrl = 'https://localhost:8080/api/states';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -35,8 +35,8 @@ export class Luv2ShopFormService {
 
     let data: number[] = [];
     
-    // build an array for "Month" dropdown list
-    // - start at current month and loop until 
+    // construye una matriz para la lista desplegable "Mes"
+    // - comienza en el mes actual y continúa hasta
 
     for (let theMonth = startMonth; theMonth <= 12; theMonth++) {
       data.push(theMonth);
@@ -49,8 +49,8 @@ export class Luv2ShopFormService {
 
     let data: number[] = [];
 
-    // build an array for "Year" downlist list
-    // - start at current year and loop for next 10 years
+    // construir una matriz para la lista desplegable "Año" 
+    // - comenzar en el año actual y recorrer los próximos 10 años
     
     const startYear: number = new Date().getFullYear();
     const endYear: number = startYear + 10;

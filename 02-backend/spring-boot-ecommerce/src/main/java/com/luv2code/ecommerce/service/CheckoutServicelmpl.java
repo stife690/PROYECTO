@@ -12,59 +12,72 @@ import javax.transaction.Transactional;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Implementación del servicio de checkout que maneja el proceso de realizar un pedido.
+ * Este servicio se encarga de procesar la compra, generar un número de seguimiento para el pedido y almacenar la información
+ * en la base de datos.
+ */
 @Service
 public class CheckoutServicelmpl implements CheckoutService {
 
     private CustomerRepository customerRepository;
 
+    /**
+     * Constructor que inyecta el repositorio de clientes.
+     * 
+     * @param customerRepository El repositorio de clientes utilizado para almacenar la información en la base de datos.
+     */
     public CheckoutServicelmpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
+    /**
+     * Procesa un pedido y lo guarda en la base de datos.
+     * Este método crea un nuevo pedido, lo llena con los artículos y las direcciones de facturación y envío,
+     * y lo asocia con el cliente correspondiente.
+     * 
+     * @param purchase El objeto de tipo {@link Purchase} que contiene la información del pedido, artículos y cliente.
+     * @return Un objeto {@link PurchaseResponse} con el número de seguimiento generado para el pedido.
+     */
     @Override
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
 
-        // retrieve the order info from dto
+        // Recupera la información del pedido desde el DTO
         Order order = purchase.getOrder();
 
-        // generate tracking number
+        // Genera un número de seguimiento para el pedido
         String orderTrackingNumber = generateOrderTrackingNumber();
         order.setOrderTrackingNumber(orderTrackingNumber);
 
-        // populate order with orderItems
+        // Agrega los artículos del pedido al pedido
         Set<OrderItem> orderItems = purchase.getOrderItems();
         orderItems.forEach(item -> order.add(item));
 
-        // populate order with billingAddress and shippingAddress
+        // Establece las direcciones de facturación y envío en el pedido
         order.setBillingAddress(purchase.getBillingAddress());
         order.setShippingAddress(purchase.getShippingAddress());
 
-        // populate customer with order
+        // Asocia el pedido al cliente
         Customer customer = purchase.getCustomer();
         customer.add(order);
 
-        // save to the database
+        // Guarda el cliente con el pedido en la base de datos
         customerRepository.save(customer);
 
-        // return a response
+        // Devuelve una respuesta con el número de seguimiento del pedido
         return new PurchaseResponse(orderTrackingNumber);
     }
 
+    /**
+     * Genera un número único de seguimiento para el pedido utilizando UUID.
+     * 
+     * @return Un número de seguimiento único generado aleatoriamente.
+     */
     private String generateOrderTrackingNumber() {
 
-        // generate a random UUID number (UUID version-4)
-        // For details see: https://en.wikipedia.org/wiki/Universally_unique_identifier
-        //
+        // Genera un número UUID aleatorio (UUID versión-4)
+        // Para más detalles, consulta: https://en.wikipedia.org/wiki/Universally_unique_identifier
         return UUID.randomUUID().toString();
     }
 }
-
-
-
-
-
-
-
-
-

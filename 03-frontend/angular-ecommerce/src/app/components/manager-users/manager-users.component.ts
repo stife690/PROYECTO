@@ -40,8 +40,8 @@ export class ManagerUsersComponent implements OnInit {
     }
   }
 
-  addUser(): void {
-    this.selectedUser = { name: '', email: '', role: 'USER', newPassword: '' };
+  addUser() {
+    this.selectedUser = { name: '', email: '', newPassword: '', role: 'USER' };
   }
   
 
@@ -49,35 +49,49 @@ export class ManagerUsersComponent implements OnInit {
     this.selectedUser = { ...user };
   }
 
-  saveUser(): void {
-    if (this.selectedUser.id) {
-      // Actualizar usuario
-      this.userService.updateUser(this.selectedUser).subscribe(
-        () => {
-          this.loadUsers();
-          this.selectedUser = null;
+  saveUser() {
+    if (this.selectedUser?.id) {
+      // Definir el objeto de actualización solo con los campos que se van a actualizar
+      const updatedUser: { name: string; email: string; role: string; newPassword?: string } = {
+        name: this.selectedUser.name,
+        email: this.selectedUser.email,
+        role: this.selectedUser.role
+      };
+  
+      // Solo agregar la nueva contraseña si ha sido proporcionada
+      if (this.selectedUser.newPassword) {
+        updatedUser.newPassword = this.selectedUser.newPassword;
+      }
+  
+      // Llamada al servicio para editar el usuario
+      this.userService.editUser(this.selectedUser.id, updatedUser).subscribe({
+        next: (response) => {
+          console.log('Usuario actualizado:', response);
+          this.loadUsers(); // Recargar la lista de usuarios
+          this.selectedUser = null; // Limpiar el formulario
         },
-        (error) => {
-          console.error('Error updating user', error);
+        error: (err) => {
+          console.error('Error al actualizar usuario:', err);
         }
-      );
+      });
     } else {
-      // Agregar nuevo usuario
-      this.userService.addUser(this.selectedUser).subscribe(
-        () => {
-          this.loadUsers();
-          this.selectedUser = null;
+      // Crear nuevo usuario
+      this.userService.createUser(this.selectedUser).subscribe({
+        next: (response) => {
+          console.log('Usuario creado:', response);
+          this.users.push(response); // Actualizar la lista de usuarios
+          this.selectedUser = null; // Limpiar el formulario
         },
-        (error) => {
-          console.error('Error adding user', error);
+        error: (err) => {
+          console.error('Error al crear usuario:', err);
         }
-      );
+      });
     }
   }
-
   
-  cancelEdit(): void {
-    this.selectedUser = null;
+  
+  cancelEdit() {
+    this.selectedUser = null; // Limpiar el formulario
   }
 
   deleteUser(id: string): void {

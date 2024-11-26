@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio que gestiona las operaciones relacionadas con los usuarios en el sistema.
+ * Proporciona métodos para registrar un nuevo usuario, buscar usuarios por correo electrónico y verificar si un correo ya está registrado.
+ */
 @Service
 public class UserService {
 
@@ -15,7 +19,16 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // Registrar un nuevo usuario
+    /**
+     * Registra un nuevo usuario en el sistema.
+     * 
+     * @param email El correo electrónico del usuario.
+     * @param password La contraseña del usuario.
+     * @param name El nombre completo del usuario.
+     * @param role El rol asignado al usuario (por ejemplo, "ADMIN", "USER").
+     * @return El usuario recién registrado.
+     * @throws RuntimeException Si el correo electrónico ya está registrado en el sistema.
+     */
     public User registerUser(String email, String password, String name, String role) {
         if (userRepository.findByEmail(email) != null) {
             throw new RuntimeException("Este correo ya está registrado.");
@@ -25,14 +38,23 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    // Buscar un usuario por email
+    /**
+     * Busca un usuario por su correo electrónico.
+     * 
+     * @param email El correo electrónico del usuario.
+     * @return El usuario encontrado, o null si no se encuentra un usuario con ese correo.
+     */
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    // Verificar si un correo ya está registrado
+    /**
+     * Verifica si un correo electrónico ya está registrado en el sistema.
+     * 
+     * @param email El correo electrónico a verificar.
+     * @return true si el correo electrónico está registrado, false si no lo está.
+     */
     public boolean isEmailRegistered(String email) {
         return userRepository.findByEmail(email) != null; // Devuelve true si el correo ya existe
     }
-    
 }

@@ -90,7 +90,7 @@ export class CheckoutComponent implements OnInit {
       })
     });
 
-    // populate credit card months
+    // completar los meses de la tarjeta de crédito
     const startMonth: number = new Date().getMonth() + 1;
     console.log("startMonth: " + startMonth);
 
@@ -101,7 +101,7 @@ export class CheckoutComponent implements OnInit {
       }
     );
 
-    // populate credit card years
+    // completar los años de la tarjeta de crédito
     this.luv2ShopFormService.getCreditCardYears().subscribe(
       data => {
         console.log("Retrieved credit card years: " + JSON.stringify(data));
@@ -110,7 +110,7 @@ export class CheckoutComponent implements OnInit {
     );
 
 
-    //populate countries
+    //completar paises 
 
     this.luv2ShopFormService.getCountries().subscribe(
       data => {
@@ -170,13 +170,13 @@ export class CheckoutComponent implements OnInit {
     if (event.target.checked) {
       this.checkoutFormGroup.controls['billingAddress']
         .setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
-      //bug fix for states
+      //corrección de errores para estados
       this.billingAddressStates = this.shippingAddressStates;
 
     } else {
       this.checkoutFormGroup.controls['billingAddress'].reset();
 
-      //bug fix for states
+      //corrección de errores para estados
 
       this.billingAddressStates = [];
 
@@ -265,7 +265,7 @@ resetCart() {
   // reset the form
   this.checkoutFormGroup.reset();
 
-  // navigate back to the products page
+  // navegar de regreso a la página de productos
   this.router.navigateByUrl("/products");
 }
 
@@ -310,7 +310,7 @@ resetCart() {
           this.billingAddressStates = data;
         }
 
-        //select first item by default
+        //seleccionar el primer elemento por defecto
         formGroup?.get('state')?.setValue(data[0]);
       }
     );

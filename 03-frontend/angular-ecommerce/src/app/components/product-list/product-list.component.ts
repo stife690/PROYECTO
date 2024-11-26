@@ -65,7 +65,7 @@ export class ProductListComponent implements OnInit {
 
     console.log(`keyword=${theKeyword}, thePageNumber=${this.thePageNumber}`);
 
-    // now search for the products using keyword
+    // ahora busque los productos usando palabras clave
     this.productService.searchProductsPaginate(this.thePageNumber - 1,
                                               this.thePageSize,
                                               theKeyword).subscribe(this.processResult());
@@ -75,17 +75,17 @@ export class ProductListComponent implements OnInit {
 
   handleListProducts() {
 
-    // check if "id" parameter is available
+    // comprobar si el parámetro "id" está disponible
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
 
     if (hasCategoryId) {
-      // get the "id" param string. convert string to a number using the "+" symbol
+      // obtenga la cadena de parámetro "id". convertir una cadena a un número usando el símbolo "+"
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
-      // get the "name" param string
+      // obtener la cadena de parámetro "nombre"
       this.currentCategoryName = this.route.snapshot.paramMap.get('name')!;
     }
     else {
-      // not category id available ... default to category id 1
+      // ID de categoría no disponible... predeterminado en ID de categoría 1
       this.currentCategoryId = 1;
       this.currentCategoryName = 'Productos';
     }
@@ -98,7 +98,7 @@ export class ProductListComponent implements OnInit {
 
     console.log(`currentCategoryId=${this.currentCategoryId}, thePageNumber=${this.thePageNumber}`);
 
-    // now get the products for the given category id
+    // obtener los productos con la identificación dada 
     this.productService.getProductListPaginate(this.thePageNumber - 1,
                                                this.thePageSize,
                                                this.currentCategoryId)
@@ -106,7 +106,7 @@ export class ProductListComponent implements OnInit {
 
 
 
-    // now get the products for the given category id
+    // obtener los productos con la identificación dada 
     this.productService.getProductList(this.currentCategoryId).subscribe(
       data => {
         this.products = data;
@@ -136,7 +136,7 @@ export class ProductListComponent implements OnInit {
     
     console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
 
-    // TODO ... do the real work
+    // TODO ... el trabajo real
     const theCartItem = new CartItem(theProduct);
 
     this.cartService.addToCart(theCartItem);

@@ -18,65 +18,92 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+/**
+ * Configuración personalizada para la exposición de repositorios REST en una aplicación Spring.
+ * <p>
+ * Esta clase implementa {@link RepositoryRestConfigurer} para personalizar la configuración
+ * de los repositorios REST, incluyendo la desactivación de ciertos métodos HTTP y la exposición
+ * de los identificadores (IDs) de las entidades a través de los endpoints REST.
+ * </p>
+ * <p>
+ * Esta configuración también establece restricciones en los métodos HTTP disponibles para 
+ * las entidades `Product`, `ProductCategory`, `Country`, y `State`, deshabilitando las 
+ * acciones PUT, POST, DELETE y PATCH.
+ * </p>
+ */
 @Configuration
 public class MyDataRestConfig implements RepositoryRestConfigurer {
 
-	
-	//nuestro administrador de entidades JPA
-	private EntityManager entityManager;
-	
-	public MyDataRestConfig(EntityManager theEntityManager) {
-		entityManager = theEntityManager;
-	}
-	
-	
+    // Administrador de entidades JPA para acceder al metamodelo de las entidades
+    private EntityManager entityManager;
+
+    /**
+     * Constructor que inicializa el administrador de entidades.
+     * 
+     * @param theEntityManager El {@link EntityManager} utilizado para acceder al metamodelo
+     *                         de las entidades en la base de datos.
+     */
+    public MyDataRestConfig(EntityManager theEntityManager) {
+        entityManager = theEntityManager;
+    }
+
+    /**
+     * Configura los repositorios REST, deshabilitando ciertos métodos HTTP para algunas entidades
+     * y exponiendo los identificadores (IDs) de las entidades en los endpoints REST.
+     * 
+     * @param config La configuración del repositorio REST.
+     * @param cors   La configuración de CORS (Cross-Origin Resource Sharing).
+     */
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 
+        // Métodos HTTP que se deshabilitarán (PUT, POST, DELETE, PATCH)
         HttpMethod[] theUnsupportedActions = {HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE, HttpMethod.PATCH};
 
-      
-        // disable HTTP methods for ProductCategory: PUT, POST, DELETE and PATCH
+        // Deshabilita los métodos HTTP no soportados para las entidades especificadas
         disableHttpMethods(Product.class, config, theUnsupportedActions);
         disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
         disableHttpMethods(Country.class, config, theUnsupportedActions);
         disableHttpMethods(State.class, config, theUnsupportedActions);
 
-        //llamamos a un metodo aux interno para llamar ids
-        
+        // Exponer los IDs de las entidades
         exposeIds(config);
-        
     }
 
-
-	private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
-		config.getExposureConfiguration()
+    /**
+     * Deshabilita los métodos HTTP especificados para una entidad en particular.
+     * 
+     * @param theClass        La clase de la entidad sobre la que se deshabilitarán los métodos HTTP.
+     * @param config          La configuración del repositorio REST.
+     * @param theUnsupportedActions Los métodos HTTP a deshabilitar.
+     */
+    private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
+        config.getExposureConfiguration()
                 .forDomainType(theClass)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
-	}
+                .withItemExposure((metadata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
+                .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
+    }
 
+    /**
+     * Expone los identificadores (IDs) de todas las entidades gestionadas por el repositorio REST.
+     * 
+     * @param config La configuración del repositorio REST.
+     */
+    private void exposeIds(RepositoryRestConfiguration config) {
 
-	private void exposeIds(RepositoryRestConfiguration config) {
+        // Obtener todas las clases de entidad del metamodelo
+        Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
 
-		//exponer identificadores de entidades
-		
-		
-		
-		//obtener una lista de todas las clases de entidad del adm. d entidades
-		Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
-		
-		//creacion de un array de tipos de entidad
-		List<Class> entityClasses = new ArrayList<>();
-		
-		//obtendremos los tipos de entidades para las entidades
-		for (EntityType tempEntityType: entities) {
-			entityClasses.add(tempEntityType.getJavaType());
-		}
-		
-		//exponemos las ids de entidad
-		Class[] domainTypes = entityClasses.toArray(new Class[0]);
-		config.exposeIdsFor(domainTypes);
-		
-	}
+        // Crear una lista para almacenar las clases de entidad
+        List<Class> entityClasses = new ArrayList<>();
+
+        // Añadir las clases de entidad a la lista
+        for (EntityType tempEntityType : entities) {
+            entityClasses.add(tempEntityType.getJavaType());
+        }
+
+        // Exponer los identificadores de todas las entidades
+        Class[] domainTypes = entityClasses.toArray(new Class[0]);
+        config.exposeIdsFor(domainTypes);
+    }
 }

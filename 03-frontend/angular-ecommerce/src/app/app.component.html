@@ -1,5 +1,6 @@
 <div class="page-wrapper">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- MENU SIDEBAR-->
 <aside class="menu-sidebar d-none d-lg-block">
   <div class="logo">
@@ -25,6 +26,7 @@
             <app-search></app-search>
             
             <div class="right-items header-wrap mx-8 px-8">
+              <app-traductor></app-traductor>         
               <app-icon-manager-users *ngIf="isAuthenticated && isAdmin"></app-icon-manager-users>
               <app-close-sesion ></app-close-sesion>   
               <app-users *ngIf="!isAuthenticated" style="margin-right: 20px;"></app-users> 
@@ -51,11 +53,11 @@
 <!-- END PAGE CONTAINER-->
 
 
-<!-- FOOTER -->
+<!-- FOOTER MEJORADO -->
 <footer class="bg-dark text-light pt-5 pb-4">
   <div class="container text-md-left">
     <div class="row">
-      <!-- Logo y Descripción -->
+      <!-- Sección Logo y Descripción -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
         <h5 class="text-uppercase fw-bold text-custom-orange">TuFerreteriaOnline</h5>
         <p>
@@ -63,24 +65,24 @@
         </p>
       </div>
 
-      <!-- Enlaces Rápidos -->
+      <!-- Sección Enlaces Rápidos -->
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
         <h6 class="text-uppercase fw-bold text-custom-orange">Enlaces Rápidos</h6>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-light">Home</a></li>
-          <li><a href="#" class="text-light">About us</a></li>
-          <li><a href="#" class="text-light">FAQ</a></li>
-          <li><a href="#" class="text-light">Recommendations</a></li>
+          <li><a href="#" class="text-light hover-link">Home</a></li>
+          <li><a href="#" class="text-light hover-link">About us</a></li>
+          <li><a href="#" class="text-light hover-link">FAQ</a></li>
+          <li><a href="#" class="text-light hover-link">Recommendations</a></li>
         </ul>
       </div>
 
-      <!-- Información de Contacto -->
+      <!-- Sección Contacto -->
       <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-4">
         <h6 class="text-uppercase fw-bold text-custom-orange">Contacto</h6>
         <ul class="list-unstyled">
           <li><i class="fas fa-map-marker-alt me-2"></i> Cr 6w # 28-03, Neiva, Colombia</li>
-          <li><i class="fas fa-envelope me-2"></i> feliperoa913gmail.com</li>
-          <li><i class="fas fa-phone me-2"></i> +57 317-385-1783</li>
+          <li><i class="fas fa-envelope me-2"></i> <a href="mailto:feliperoa913&#64;gmail.com" class="text-light hover-link">feliperoa913&#64;gmail.com</a></li>
+          <li><i class="fas fa-phone me-2"></i> <a href="tel:+573173851783" class="text-light hover-link">+57 317-385-1783</a></li>
           <li><i class="fas fa-clock me-2"></i> Lunes - Viernes: 9:00 - 18:00</li>
         </ul>
       </div>
@@ -90,16 +92,16 @@
         <h6 class="text-uppercase fw-bold text-custom-orange">Síguenos</h6>
         <ul class="list-inline">
           <li class="list-inline-item">
-            <a href="#" class="text-light"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://facebook.com" target="_blank" class="text-light hover-link"><i class="fab fa-facebook-f fa-lg"></i></a>
           </li>
           <li class="list-inline-item">
-            <a href="#" class="text-light"><i class="fab fa-twitter"></i></a>
+            <a href="https://twitter.com" target="_blank" class="text-light hover-link"><i class="fab fa-twitter fa-lg"></i></a>
           </li>
           <li class="list-inline-item">
-            <a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
+            <a href="https://instagram.com" target="_blank" class="text-light hover-link"><i class="fab fa-instagram fa-lg"></i></a>
           </li>
           <li class="list-inline-item">
-            <a href="#" class="text-light"><i class="fab fa-linkedin"></i></a>
+            <a href="https://linkedin.com" target="_blank" class="text-light hover-link"><i class="fab fa-linkedin fa-lg"></i></a>
           </li>
         </ul>
       </div>
@@ -113,10 +115,34 @@
       </div>
       <div class="col-md-6 col-lg-6">
         <p class="text-center text-md-end">
-          <a href="#" class="text-light">Términos y Condiciones</a> | 
-          <a href="#" class="text-light">Política de Privacidad</a>
+          <a href="#" class="text-light hover-link">Términos y Condiciones</a> | 
+          <a href="#" class="text-light hover-link">Política de Privacidad</a>
         </p>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- Estilos Personalizados -->
+<style>
+  /* Hover effect para enlaces */
+  .hover-link:hover {
+    text-decoration: underline;
+    color: #ff9800; /* Color naranja brillante */
+  }
+
+  /* Fondo de footer mejorado */
+  footer {
+    background: linear-gradient(180deg, #343a40, #212529); /* Gradiente oscuro */
+  }
+
+  /* Espaciado y tamaño de iconos sociales */
+  .list-inline-item a {
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+  }
+  .list-inline-item a:hover {
+    transform: scale(1.2); /* Efecto de zoom */
+    color: #ff9800; /* Color naranja brillante */
+  }
+</style>

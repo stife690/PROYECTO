@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/api/users';
+  private apiUrl = 'https://localhost:8080/api/users';
 
   constructor(private http: HttpClient) {}
 
@@ -19,7 +19,24 @@ export class UserService {
       }))
     );
   }
+
+    // Crear nuevo usuario
+    createUser(user: any): Observable<any> {
+      const payload = {
+        name: user.name,
+        email: user.email,
+        password: user.newPassword,
+        role: user.role
+        
+        
+      };
+      return this.http.post('https://localhost:8080/api/register', payload);
+    }    
   
+    editUser(id: string, user: any): Observable<any> {
+      return this.http.put(`https://localhost:8080/api/edit/${id}`, user);
+    }
+    
 
   addUser(user: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, user);

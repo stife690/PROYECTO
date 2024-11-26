@@ -22,7 +22,7 @@ export class LoginComponent {
   onLogin(): void {
     const loginData = { email: this.email, password: this.password };
 
-    this.http.post('http://localhost:8080/api/login', loginData).subscribe(
+    this.http.post('https://localhost:8080/api/login', loginData).subscribe(
       (response: any) => {
         console.log('Inicio de sesión exitoso:', response);
 

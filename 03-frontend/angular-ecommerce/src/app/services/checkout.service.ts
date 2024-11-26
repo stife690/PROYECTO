@@ -9,7 +9,7 @@ import { Purchase } from '../common/purchase';
 export class CheckoutService {
 
   //configuramos nuestra URL de Compra(URL BACKENDS D SPRINGBOOT)
-  private purchaseUrl = 'http://localhost:8080/api/checkout/purchase';
+  private purchaseUrl = 'https://localhost:8080/api/checkout/purchase';
 
   constructor(private httpClient: HttpClient) { }
 

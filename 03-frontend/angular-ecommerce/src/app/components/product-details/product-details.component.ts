@@ -26,7 +26,7 @@ export class ProductDetailsComponent implements OnInit {
 
   handleProductDetails() {
 
-    // get the "id" param string. convert string to a number using the "+" symbol
+    // obtenga la cadena de parámetro "id". convertir una cadena a un número usando el símbolo "+"
     const theProductId: number = +this.route.snapshot.paramMap.get('id')!;
 
     this.productService.getProduct(theProductId).subscribe(
